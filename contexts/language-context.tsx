@@ -8,7 +8,7 @@ export type Language = "en" | "zh-CN" | "zh-TW" | "es" | "fr" | "ja" | "ko"
 // Update the translations object to include new languages
 const translations = {
   en: {
-    title: "Online Image Editor",
+    title: "EditMyImage.Online",
     description: "Upload, edit, and download your images with various tools",
     upload: "Upload Image",
     noImage: "No image",
@@ -53,7 +53,7 @@ const translations = {
     korean: "한국어",
   },
   "zh-CN": {
-    title: "在线图像编辑器",
+    title: "EditMyImage.Online",
     description: "上传、编辑和下载您的图像，使用各种工具",
     upload: "上传图像",
     noImage: "没有图像",
@@ -98,7 +98,7 @@ const translations = {
     korean: "한국어",
   },
   "zh-TW": {
-    title: "線上圖像編輯器",
+    title: "EditMyImage.Online",
     description: "上傳、編輯和下載您的圖像，使用各種工具",
     upload: "上傳圖像",
     noImage: "沒有圖像",
@@ -143,7 +143,7 @@ const translations = {
     korean: "한국어",
   },
   es: {
-    title: "Editor de Imágenes en Línea",
+    title: "EditMyImage.Online",
     description: "Sube, edita y descarga tus imágenes con varias herramientas",
     upload: "Subir Imagen",
     noImage: "Sin imagen",
@@ -188,7 +188,7 @@ const translations = {
     korean: "한국어",
   },
   fr: {
-    title: "Éditeur d'Images en Ligne",
+    title: "EditMyImage.Online",
     description: "Téléchargez, modifiez et téléchargez vos images avec divers outils",
     upload: "Télécharger une Image",
     noImage: "Pas d'image",
@@ -233,7 +233,7 @@ const translations = {
     korean: "한국어",
   },
   ja: {
-    title: "オンライン画像エディター",
+    title: "EditMyImage.Online",
     description: "さまざまなツールで画像をアップロード、編集、ダウンロード",
     upload: "画像をアップロード",
     noImage: "画像なし",
@@ -278,7 +278,7 @@ const translations = {
     korean: "한국어",
   },
   ko: {
-    title: "온라인 이미지 편집기",
+    title: "EditMyImage.Online",
     description: "다양한 도구로 이미지 업로드, 편집 및 다운로드",
     upload: "이미지 업로드",
     noImage: "이미지 없음",
