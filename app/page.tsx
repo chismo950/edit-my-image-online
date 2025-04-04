@@ -191,16 +191,27 @@ export default function ImageEditor() {
         for (let i = 0; i < data.length; i += 4) {
           // Apply brightness
           const brightnessValue = brightness / 100
-          data[i] = data[i] * brightnessValue
-          data[i + 1] = data[i + 1] * brightnessValue
-          data[i + 2] = data[i + 2] * brightnessValue
+          data[i] = data[i] * brightnessValue // Red
+          data[i + 1] = data[i + 1] * brightnessValue // Green
+          data[i + 2] = data[i + 2] * brightnessValue // Blue
 
           // Apply contrast
-          const contrastFactor = (contrast / 100) * 2.55
-          const factor = (259 * (contrastFactor + 255)) / (255 * (259 - contrastFactor))
-          data[i] = factor * (data[i] - 128) + 128
-          data[i + 1] = factor * (data[i + 1] - 128) + 128
-          data[i + 2] = factor * (data[i + 2] - 128) + 128
+          const contrastValue = (contrast - 100) / 100
+          for (let j = 0; j < 3; j++) {
+            data[i + j] = ((data[i + j] / 255 - 0.5) * (contrastValue + 1) + 0.5) * 255
+          }
+
+          // Apply saturation
+          const saturationValue = saturation / 100
+          const gray = 0.2989 * data[i] + 0.5870 * data[i + 1] + 0.1140 * data[i + 2] // Luminance
+          data[i] = gray + (data[i] - gray) * saturationValue // Red
+          data[i + 1] = gray + (data[i + 1] - gray) * saturationValue // Green
+          data[i + 2] = gray + (data[i + 2] - gray) * saturationValue // Blue
+
+          // Ensure values stay within valid range (0-255)
+          for (let j = 0; j < 3; j++) {
+            data[i + j] = Math.max(0, Math.min(255, data[i + j]))
+          }
         }
 
         ctx.putImageData(imageData, 0, 0)
