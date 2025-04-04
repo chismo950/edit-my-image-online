@@ -25,6 +25,7 @@ import {
   Scissors,
   Plus,
   Trash2,
+  Github,
 } from "lucide-react"
 import { ThemeLanguageSwitcher } from "@/components/theme-language-switcher"
 import { useLanguage } from "@/contexts/language-context"
@@ -1079,7 +1080,22 @@ export default function ImageEditor() {
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>{t("description")}</CardDescription>
           </div>
-          <ThemeLanguageSwitcher />
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              asChild
+            >
+              <a
+                href="https://github.com/chismo950/edit-my-image-online"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            </Button>
+            <ThemeLanguageSwitcher />
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col md:flex-row gap-6">
