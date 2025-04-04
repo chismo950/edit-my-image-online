@@ -899,13 +899,26 @@ export default function ImageEditor() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    ctx.save()
-    ctx.scale(-1, 1)
-    ctx.drawImage(new Image(), -canvas.width, 0, canvas.width, canvas.height)
-    ctx.restore()
+    const img = new Image()
+    img.crossOrigin = "anonymous"
+    img.onload = () => {
+      ctx.save()
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      // Flip context horizontally from the center
+      ctx.translate(canvas.width, 0)
+      ctx.scale(-1, 1)
+      // Draw the image
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      ctx.restore()
 
-    // Add to history
-    addToHistory(canvas.toDataURL(`image/${imageFormat}`, imageQuality / 100))
+      // Update image data
+      const newImageData = canvas.toDataURL(`image/${imageFormat}`, imageQuality / 100)
+      setImage(newImageData)
+      // Add to history
+      addToHistory(newImageData)
+    }
+    img.src = image
   }
 
   // Flip image vertically
@@ -916,13 +929,26 @@ export default function ImageEditor() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    ctx.save()
-    ctx.scale(1, -1)
-    ctx.drawImage(new Image(), 0, -canvas.height, canvas.width, canvas.height)
-    ctx.restore()
+    const img = new Image()
+    img.crossOrigin = "anonymous"
+    img.onload = () => {
+      ctx.save()
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      // Flip context vertically from the center
+      ctx.translate(0, canvas.height)
+      ctx.scale(1, -1)
+      // Draw the image
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      ctx.restore()
 
-    // Add to history
-    addToHistory(canvas.toDataURL(`image/${imageFormat}`, imageQuality / 100))
+      // Update image data
+      const newImageData = canvas.toDataURL(`image/${imageFormat}`, imageQuality / 100)
+      setImage(newImageData)
+      // Add to history
+      addToHistory(newImageData)
+    }
+    img.src = image
   }
 
   // Apply adjustments (brightness, contrast, saturation)
