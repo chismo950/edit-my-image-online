@@ -9,7 +9,32 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "EditMyImage.Online",
-  description: "Edit your images online with various tools"
+  description: "Edit your images online with various tools",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any"
+      },
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml"
+      }
+    ],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png"
+      }
+    ],
+    other: [
+      {
+        rel: "manifest",
+        url: "/site.webmanifest"
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
