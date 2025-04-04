@@ -1328,8 +1328,8 @@ export default function ImageEditor() {
 
               {/* History and download controls */}
               {image && (
-                <div className="flex justify-between w-full mt-4">
-                  <div className="flex gap-2">
+                <div className="flex flex-wrap justify-between w-full mt-4 gap-4">
+                  <div className="flex flex-wrap gap-2">
                     <Button variant="outline" onClick={undo} disabled={historyIndex <= 0}>
                       <Undo className="h-4 w-4 mr-2" /> {t("undo")}
                     </Button>
