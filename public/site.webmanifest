@@ -1,6 +1,6 @@
 {
-  "name": "Edit My Image Online",
-  "short_name": "Edit My Image Online",
+  "name": "EditMyImage.online",
+  "short_name": "EditMyImage.online",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
