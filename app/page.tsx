@@ -1006,8 +1006,17 @@ export default function ImageEditor() {
   const downloadImage = () => {
     if (!canvasRef.current) return
 
+    // 生成时间戳字符串
+    const now = new Date()
+    const timestamp = now.getFullYear().toString() +
+      (now.getMonth() + 1).toString().padStart(2, '0') +
+      now.getDate().toString().padStart(2, '0') +
+      now.getHours().toString().padStart(2, '0') +
+      now.getMinutes().toString().padStart(2, '0') +
+      now.getSeconds().toString().padStart(2, '0')
+
     const link = document.createElement("a")
-    link.download = `edited-image.${imageFormat}`
+    link.download = `EditMyImage.online_${timestamp}.${imageFormat}`
     link.href = canvasRef.current.toDataURL(`image/${imageFormat}`, imageQuality / 100)
     link.click()
   }
