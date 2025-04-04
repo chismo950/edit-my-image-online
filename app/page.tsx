@@ -233,6 +233,16 @@ export default function ImageEditor() {
         const width = Math.abs(cropEnd.x - cropStart.x)
         const height = Math.abs(cropEnd.y - cropStart.y)
 
+        // 计算显示比例
+        const scaleX = displayedWidth / imageWidth
+        const scaleY = displayedHeight / imageHeight
+        
+        // 计算实际的像素尺寸
+        const actualWidth = Math.round(width / scaleX)
+        const actualHeight = Math.round(height / scaleY)
+
+        if (width === 0 || height === 0) return
+
         // Create a copy of the current canvas state
         const currentImageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
@@ -264,28 +274,33 @@ export default function ImageEditor() {
         ctx.fillRect(x + width / 2 - handleSize / 2, y + height - handleSize / 2, handleSize, handleSize) // Bottom
         ctx.fillRect(x - handleSize / 2, y + height / 2 - handleSize / 2, handleSize, handleSize) // Left
 
-        // Display dimensions
-        const dimensionText = `${Math.round(width)} × ${Math.round(height)}`
+        // Display dimensions using actual pixel values
+        const dimensionText = `${actualWidth} × ${actualHeight}`
 
-        // Set text style
-        ctx.font = "14px Arial"
+        // 计算文本大小，根据裁剪区域的大小进行缩放，但设置最小和最大值
+        const baseFontSize = 14
+        const scaleFactor = Math.min(width, height) / 100 // 根据裁剪区域大小计算缩放因子
+        const fontSize = Math.max(baseFontSize, Math.min(baseFontSize * scaleFactor, 32)) // 限制字体大小在14-32之间
+
+        // Set text style with dynamic font size
+        ctx.font = `${fontSize}px Arial`
         ctx.fillStyle = "white"
         ctx.textAlign = "center"
 
         // Create background for text
         const textMetrics = ctx.measureText(dimensionText)
-        const textWidth = textMetrics.width + 10
-        const textHeight = 24
+        const textWidth = textMetrics.width + fontSize // 增加内边距，使用字体大小作为参考
+        const textHeight = fontSize * 1.5 // 文本框高度也根据字体大小调整
         const textX = x + width / 2
-        const textY = y + height + 20
+        const textY = y + height + fontSize * 1.2 // 调整文本位置，使用字体大小作为参考
 
         // Draw text background
         ctx.fillStyle = "rgba(0, 0, 0, 0.7)"
         ctx.fillRect(textX - textWidth / 2, textY - textHeight / 2, textWidth, textHeight)
 
-        // Draw text
+        // Draw text with vertical centering
         ctx.fillStyle = "white"
-        ctx.fillText(dimensionText, textX, textY + 5)
+        ctx.fillText(dimensionText, textX, textY + fontSize / 3) // 调整文本垂直位置以居中
       }
     }
     img.src = image
